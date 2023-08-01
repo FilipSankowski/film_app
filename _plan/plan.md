@@ -1,0 +1,147 @@
+# **Portal treningowy**
+Strona internetowa udostępniajaca materiały do nauki z różnych dziedzin i zagadnień technicznych
+
+## Release 1 - baza danych i API
+* Jako administrator mogę:
+  * Modyfikować dane użytkowników:
+    * wyświetlić informacje o wszystkich uzytkownikach
+    * wyświetlić informacje o konkretnym użytkowniku
+    * dodać nowego użytkownika
+    * usunąć istniejącego użytkownika
+    * zaktualizować dane istniejącego użytkownika
+  * Modyfikować dane filmów:
+    * wyświetlić informacje o wszystkich filmach
+    * wyświetlić informacje o konkretnym filmie
+    * dodać informacje o nowym filmie
+    * usunąć informacje o istniejacym filmie
+    * zaktualizować informacje o istniejacym filmie
+  * Modyfikować dane tagów do filmów:
+    * dodać nowy tag filmu
+    * zmienić nazwę istniejącego tagu
+  * Modyfikować dane komentarzy:
+    * wyświetlić informacje o komentarzach do istniejącego filmu
+    * wyświetlić informacje o komentarzach istniejącego użytkownika
+* Jako użytkownik mogę:
+  * wyświetlić informacje o swoim użytkowniku
+  * wyświetlić informacje o swoich komentarzach
+  * wyświetlić informacje o filmach ze swojej listy 'do obejrzenia'
+  * wyświetlić informacje o filmach ze swojej listy 'ulubione'
+* Założenia:
+  * Baza danych: postgreSQL
+  * Backend: PHP (laravel)
+  * Frontend: JS (Next.js)
+  * Nowe tagi mogą mieć max. 20 znaków długości
+* Uwagi:
+  * Starter-pack: https://github.com/laravel/breeze-next
+<br><br>
+
+## Release 2 - logowanie
+* Jako administrator mogę:
+  * Działać na własnym koncie:
+    * Zalogować się na swoje konto
+    * Wylogować się ze swojego konta
+    * Odczytać informacje o swoim koncie
+    * Zmienić swoje hasło
+    * Zmienić swoją nazwę użytkownika
+  * Działać na koncie zwykłego użytkownika:
+    * Odczytać informacje o koncie dowolnego zwykłego użytkownika
+    * Zmienić hasło dowolnego zwykłego użytkownika
+    * Zmienić nazwę użytkownika dowolnego zwykłego użytkownika
+    * Usunąć konto dowolnego zwykłego użytkownika
+* Jako użytkownik mogę:
+  * Zalogować się na swoje konto
+  * Wylogować się ze swojego konta
+  * Odczytać informacje o swoim koncie
+  * Zmienić swoje hasło
+  * Zmienić swoją nazwę użytkownika
+  * Usunąć swoje konto
+* Założenia:
+  * Nazwa użytkownika może zawierać litery małe i duże, cyfry oraz znak '_'
+  * Nazwa użytkownika musi być unikalna
+  * Nazwa użytkownika może mieć max. 20 znaków długości
+  * Hasło może zawierać litery małe i duże, cyfry oraz znaki specjalne
+  * Hasło musi zawierać co najmniej jedną literę małą, jedną dużą, jedną cyfrę i jeden znak specjalny oraz mieć 8+ znaków długości
+  * Nowe hasło nie może być takie same jak stare hasło 
+<br><br>
+
+## Release 3 - wyświetlacz filmów
+* Jako użytkownik mogę:
+  * Uruchomić odtwarzanie filmu
+  * Zatrzymać odtwarzanie filmu
+  * Jednym kliknięciem przewinąć wideo o 10s do przodu
+  * Jednym kliknięciem przewinąć wideo o 10s do tyłu
+  * Zacząć wideo z dowolnego progu czasowego (np. zaczynając od 1:34)
+* Założenia:
+  * Wideo nie uruchamia się automatycznie
+* Uwagi:
+  * Cloudinary - https://cloudinary.com/blog/autoplay-a-video-on-a-next-js-landing-page
+<br><br>
+
+## Release 4 - wyszukiwarka filmów i karta filmu
+* Jako administrator mogę:
+  * Dodać nowy film:
+    * Dodać nowy plik z filmem
+    * Dodać nowy tytuł filmu
+    * Dodać nowy tag do filmu
+    * Dodać nowy krótki opis filmu
+    * Dodać nowy pełny opis filmu
+  * Zmodyfikować istniejący film:
+    * Zmienić ścieżkę do pliku wideo
+    * Zmienić tytuł filmu
+    * Zmienić tagi filmu
+    * Zmienić krótki opis filmu
+    * Zmienić pełen opis filmu
+  * Usunąć istniejący film
+* Jako użytkownik mogę:
+  * W wyszukiwarce:
+    * wpisać słowo klucz, i otrzymać listę filmów których tytuły zawierają to słowo klucz
+    * wybrać tag, i po wpisaniu słowa klucz otrzymać tylko filmy posiadające ten tag
+    * Na otrzymanej liście zobaczyć tytuł filmu, jego tagi i krótki opis
+    * Na otrzymanej liście może kliknąć w film, aby przenieść się na stronę tego filmu
+  * Na stronie filmu:
+    * Korzystać z wyświetlacza filmu
+    * Kliknąć przycisk, aby dodać ten film do listy 'do obejrzenia'
+    * Kliknąć przycisk, aby dodać ten film do listy 'ulubione'
+* Założenia:
+  * Każdy film musi mieć koniecznie tytuł i min. 1 tag
+  * Każdy film może mieć też opcjonalnie krótki opis (50 znaków) i pełen opis (1000 znaków)
+  * Usunięcie filmu usunie także automatycznie odpowiedający mu plik na serwerze
+  * Wideo powinno być w formacie .mp4
+  * Wyszukując po słowie klucz, w pierwszej kolejności listują się filmy które zaczynają się na dany klucz, potem reszta filmów które w tytule zawierają klucz
+  * Karta filmu składa się z wyświetlacza na górze, pełnego opisu pod nim i w przyszłości sekcji komentarzy pod opisem
+<br><br>
+
+## Release 5 - sekcja komentarzy
+* Jako administrator mogę:
+  * Działać na swoich komentarze:
+    * Dodawać nowy komentarz
+    * Dodawać komentarz w odpowiedzi do innego komentarza
+    * Edytować istniejący komentarz
+    * Usunąć istniejący komentarz
+  * Działać na komentarzach zwykłych użytkowników:
+    * Usunąć istniejący komentarz
+* Jako użytkownik mogę:
+  * Dodawać nowy komentarz
+  * Dodawać komentarz w odpowiedzi do innego komentarza
+  * Edytować istniejący komentarz
+  * Usunąć istniejący komentarz
+* Założenia:
+  * Sekcja komentarzy znajduje się pod opisem filmu
+  * Komentarz ma maksymalną długość 250 znaków
+<br><br>
+
+## Project bazy danych
+![nie znaleziono pliku](database_plan.drawio.png)
+<br><br>
+
+
+<!-- 
+## Release templete - 
+* Jako administrator mogę:
+  * to
+* Jako użytkownik mogę:
+  * to
+* Założenia:
+  * takie
+<br><br>
+-->
