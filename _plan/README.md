@@ -16,11 +16,13 @@ Strona internetowa udostępniajaca materiały do nauki z różnych dziedzin i za
     * usunąć informacje o istniejacym filmie
     * zaktualizować informacje o istniejacym filmie
   * Modyfikować dane tagów do filmów:
+    * wyświetlić informacje o wszystkich tagach
     * dodać nowy tag filmu
     * zmienić nazwę istniejącego tagu
   * Modyfikować dane komentarzy:
     * wyświetlić informacje o komentarzach do istniejącego filmu
     * wyświetlić informacje o komentarzach istniejącego użytkownika
+    * usunąć treść istniejącego komentarza
 * Jako użytkownik mogę:
   * wyświetlić informacje o swoim użytkowniku
   * wyświetlić informacje o swoich komentarzach
@@ -134,6 +136,50 @@ Strona internetowa udostępniajaca materiały do nauki z różnych dziedzin i za
 ![nie znaleziono grafiki](database_plan.drawio.png)
 <br><br>
 
+## Project API
+* /api/users
+  * GET / 
+    * Zwraca dane wszystkich zarejestrowanych użytkowników
+  * GET /{id} 
+    * Zwraca dane użytkownika o danym id
+  * POST /put 
+    * Parametry: [{'name': string, 'password': string}] 
+    * Dodaje nowego użytkownika do bazy danych
+  * POST /post/{id} 
+    * Parametry: [{'name': string, 'password': string}] 
+    * Aktualizuje dane użytkownika o danym id
+  * GET /delete/{id} 
+    * Usuwa z bazy danych użytkownika o danym id
+* /api/videos
+  * GET / 
+    * Zwraca dane wszystkich filmów
+  * GET /{id} 
+    * Zwraca dane filmu o danym id
+  * POST /put 
+    * Parametry: [{'title': string, 'path': string, 'tags': array, 'short_desc?': string, 'full_desc?': string}] 
+    * Dodaje nowy film do bazy danych
+  * POST /post/{id} 
+    * Parametry: [{'title?': string, 'path?': string, 'tags?': array, 'short_desc?': string, 'full_desc?': string}] 
+    * Aktualizuje dane filmu o danym id
+  * GET /delete/{id} 
+    * Usuwa z bazy danych film o danym id
+* /api/tags
+  * GET / 
+    * Zwraca dane o wszystkich tagach
+  * POST /put 
+    * Parametry: [{'name': string}]
+    * Dodaje nowy tag do bazy danych
+  * POST /post/{id} 
+    * Parametry: [{'name': string}]
+    * Aktualizuje dane tagu o danym id
+* /api/comments
+  * GET /user/{id} 
+    * Zwraca dane o wszystkich komentarzach użytkownika o danym id
+  * GET /video/{id} 
+    * Zwraca dane o wszystkich komentarzach do filmu o danym id
+  * GET /clear/{id}
+    * Zmienia treść komentarza o danym id na "Komentarz usunięty przez administrację"
+<br><br>
 
 <!-- 
 ## Release templete - 
