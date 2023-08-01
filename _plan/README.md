@@ -131,7 +131,7 @@ Strona internetowa udostępniajaca materiały do nauki z różnych dziedzin i za
 <br><br>
 
 ## Project bazy danych
-![nie znaleziono pliku](database_plan.drawio.png)
+![nie znaleziono grafiki](database_plan.drawio.png)
 <br><br>
 
 
