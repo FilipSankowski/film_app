@@ -142,41 +142,51 @@ Strona internetowa udostępniajaca materiały do nauki z różnych dziedzin i za
     * Zwraca dane wszystkich zarejestrowanych użytkowników
   * GET /{id} 
     * Zwraca dane użytkownika o danym id
-  * POST /put 
+  * GET /nameHas/{key}
+    * Zwraca dane użytkownika którego nazwa zawiera klucz
+  * PUT / 
     * Parametry: [{'name': string, 'password': string}] 
     * Dodaje nowego użytkownika do bazy danych
-  * POST /post/{id} 
+  * POST /{id} 
     * Parametry: [{'name': string, 'password': string}] 
     * Aktualizuje dane użytkownika o danym id
-  * GET /delete/{id} 
+  * DELETE /{id} 
     * Usuwa z bazy danych użytkownika o danym id
 * /api/videos
   * GET / 
     * Zwraca dane wszystkich filmów
   * GET /{id} 
     * Zwraca dane filmu o danym id
-  * POST /put 
+  * GET /titleHas/{key}
+    * Zwraca dane filmów które w tytule zawierają klucz
+  * GET /titleHas/{key}/tag/{tagId}
+    * Zwraca dane filmów które w tytule zawierają klucz i mają dany tag
+  * PUT / 
     * Parametry: [{'title': string, 'path': string, 'tags': array, 'short_desc?': string, 'full_desc?': string}] 
     * Dodaje nowy film do bazy danych
-  * POST /post/{id} 
+  * POST /{id} 
     * Parametry: [{'title?': string, 'path?': string, 'tags?': array, 'short_desc?': string, 'full_desc?': string}] 
     * Aktualizuje dane filmu o danym id
-  * GET /delete/{id} 
+  * DELETE /{id} 
     * Usuwa z bazy danych film o danym id
 * /api/tags
   * GET / 
     * Zwraca dane o wszystkich tagach
-  * POST /put 
+  * PUT / 
     * Parametry: [{'name': string}]
     * Dodaje nowy tag do bazy danych
-  * POST /post/{id} 
+  * POST /{id} 
     * Parametry: [{'name': string}]
     * Aktualizuje dane tagu o danym id
+  * DELETE /{id} 
+    * Usuwa z bazy danych tag o danym id
 * /api/comments
   * GET /user/{id} 
     * Zwraca dane o wszystkich komentarzach użytkownika o danym id
   * GET /video/{id} 
     * Zwraca dane o wszystkich komentarzach do filmu o danym id
+  * GET /video/{videoId}/user/{userId}
+    * Zwraca dane o wszystkich komentarzach danego użytkownika do danego filmu
   * GET /clear/{id}
     * Zmienia treść komentarza o danym id na "Komentarz usunięty przez administrację"
 <br><br>
