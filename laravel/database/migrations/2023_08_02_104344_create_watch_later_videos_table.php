@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('watch_later_videos', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('password');
-            $table->rememberToken();
+            $table->integer('id_user');
+            $table->integer('id_video');
             $table->timestamps();
+
+            $table->foreign('id_user')->references('id')->on('users');
+            $table->foreign('id_video')->references('id')->on('videos');
         });
     }
 
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('watch_later_videos');
     }
 };

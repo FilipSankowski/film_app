@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('film_tags', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('password');
-            $table->rememberToken();
+            $table->integer('id_video');
+            $table->integer('id_tag');
             $table->timestamps();
+
+            $table->foreign('id_video')->references('id')->on('videos');
+            $table->foreign('id_tag')->references('id')->on('tags');
         });
     }
 
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('film_tags');
     }
 };
