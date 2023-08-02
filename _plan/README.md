@@ -105,7 +105,7 @@ Strona internetowa udostępniajaca materiały do nauki z różnych dziedzin i za
     * Kliknąć przycisk, aby dodać ten film do listy 'do obejrzenia'
     * Kliknąć przycisk, aby dodać ten film do listy 'ulubione'
 * Założenia:
-  * Każdy film musi mieć koniecznie tytuł i min. 1 tag
+  * Każdy film musi mieć koniecznie tytuł (max. 70 znaków)
   * Każdy film może mieć też opcjonalnie krótki opis (50 znaków) i pełen opis (1000 znaków)
   * Usunięcie filmu usunie także automatycznie odpowiedający mu plik na serwerze
   * Wideo powinno być w formacie .mp4
