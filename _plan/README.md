@@ -152,6 +152,7 @@ Strona internetowa udostępniajaca materiały do nauki z różnych dziedzin i za
     * Aktualizuje dane użytkownika o danym id
   * DELETE /{id} 
     * Usuwa z bazy danych użytkownika o danym id
+---
 * /api/videos
   * GET / 
     * Zwraca dane wszystkich filmów
@@ -169,9 +170,42 @@ Strona internetowa udostępniajaca materiały do nauki z różnych dziedzin i za
     * Aktualizuje dane filmu o danym id
   * DELETE /{id} 
     * Usuwa z bazy danych film o danym id
+---
+* /api/videos/favourites
+  * GET / 
+    * Zwraca dane wszystkich ulubionych filmów
+  * GET /{id} 
+    * Zwraca dane ulubionego filmu o danym id
+  * GET /user/{id} 
+    * Zwraca informacje o id wszystkich filmów ulubionych przez użytkownika o danym id
+  * GET /video/{id} 
+    * Zwraca informacje o id wszystkich użytkownikaów którzy zapisali film o danym id jako ulubiony
+  * PUT / 
+    * Parametry: [{'id_user': int, 'id_video': int}] 
+    * Dodaje nowy ulubiony film do bazy danych
+  * DELETE /{id} 
+    * Usuwa z bazy danych ulubiony film o danym id
+---
+* /api/videos/watchLater
+  * GET / 
+    * Zwraca dane wszystkich filmów do obejrzenia
+  * GET /{id} 
+    * Zwraca dane filmu do obejrzenia o danym id
+  * GET /user/{id} 
+    * Zwraca informacje o id wszystkich filmów do obejrzenia zapisanych przez użytkownika o danym id
+  * GET /video/{id} 
+    * Zwraca informacje o id wszystkich użytkownikaów którzy zapisali film o danym id jako do obejrzenia
+  * PUT / 
+    * Parametry: [{'id_user': int, 'id_video': int}] 
+    * Dodaje nowy film do obejrzenia do bazy danych
+  * DELETE /{id} 
+    * Usuwa z bazy danych film do obejrzenia o danym id
+---
 * /api/tags
   * GET / 
     * Zwraca dane o wszystkich tagach
+  * GET /{id}
+    * Zwraca dane o tagu o danym id
   * PUT / 
     * Parametry: [{'name': string}]
     * Dodaje nowy tag do bazy danych
@@ -180,6 +214,15 @@ Strona internetowa udostępniajaca materiały do nauki z różnych dziedzin i za
     * Aktualizuje dane tagu o danym id
   * DELETE /{id} 
     * Usuwa z bazy danych tag o danym id
+  * GET /video/{id}
+    * Zwraca tagi filmu o danym id
+  * PUT /video/{id_video}/tag/{id_tag}
+    * Dodaje nowy tag do filmu o danym id
+  * DELETE /video/{id}
+    * Usuwa wszystkie tagi z filmu o danym id
+  * DELETE /video/{id_video}/tag/{id_tag}
+    * Usuwa tag o danym id z filmu o danym id
+---
 * /api/comments
   * GET /user/{id} 
     * Zwraca dane o wszystkich komentarzach użytkownika o danym id
@@ -190,7 +233,7 @@ Strona internetowa udostępniajaca materiały do nauki z różnych dziedzin i za
   * GET /clear/{id}
     * Zmienia treść komentarza o danym id na "Komentarz usunięty przez administrację"
 <br><br>
-
+---
 <!-- 
 ## Release templete - 
 * Jako administrator mogę:
