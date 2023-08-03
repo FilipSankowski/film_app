@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\FavouriteVideoController;
+use App\Http\Controllers\WatchLaterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,17 @@ Route::controller(UserController::class)->prefix('users')->group(function() {
 });
 
 Route::controller(FavouriteVideoController::class)->prefix('videos/favourites')->group(function() {
+    Route::get('/', 'showAll');
+    Route::get('/{id}', 'showById');
+    Route::get('/user/{id}', 'showByUser');
+    Route::get('/video/{id}', 'showByVideo');
+    Route::put('/', 'add');
+    Route::delete('/{id}', 'delete');
+
+    Route::fallback(function () {return response('Endpoint not found', 404);});
+});
+
+Route::controller(WatchLaterController::class)->prefix('videos/watchLater')->group(function() {
     Route::get('/', 'showAll');
     Route::get('/{id}', 'showById');
     Route::get('/user/{id}', 'showByUser');
