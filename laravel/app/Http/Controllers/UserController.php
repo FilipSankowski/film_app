@@ -18,21 +18,21 @@ class UserController extends Controller
         return true;
     }
 
-    public function showById(mixed $id = null) {
-        if ($id == null) {
-            try {
-                return response(User::all(), 200);
-            } catch (Exception $e) {
-                return response('Bad request', 400);
-            }
-        } else {
-            try {
-                $user = User::findOrFail($id);
-            } catch (ModelNotFoundException $e) {
-                return response('Invalid user id', 404);
-            }
-            return response($user, 200);
+    public function showAll() {
+        try {
+            return response(User::all(), 200);
+        } catch (Exception $e) {
+            return response('Bad request', 400);
         }
+    }
+
+    public function showById(mixed $id) {
+        try {
+            $user = User::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            return response('Invalid user id', 404);
+        }
+        return response($user, 200);
     }
 
     public function showByTitle(mixed $key) {
@@ -45,6 +45,9 @@ class UserController extends Controller
 
     public function add(Request $request) {
         try {
+            if (!$request->has(['name', 'password'])) {
+                return response('Bad request', 400);
+            }
             $user = new User;
             $user->name = $request->name;
             $user->password = $request->password;

@@ -160,13 +160,15 @@ Strona internetowa udostępniajaca materiały do nauki z różnych dziedzin i za
     * Zwraca dane filmu o danym id
   * GET /titleHas/{key}
     * Zwraca dane filmów które w tytule zawierają klucz
+  * GET /tag/{tagId}
+    * Zwraca dane filmów które mają dany tag
   * GET /titleHas/{key}/tag/{tagId}
     * Zwraca dane filmów które w tytule zawierają klucz i mają dany tag
   * PUT / 
-    * Parametry: [{'title': string, 'path': string, 'tags': array, 'short_desc?': string, 'full_desc?': string}] 
+    * Parametry: [{'title': string, 'path': string, 'short_desc?': string, 'full_desc?': string}] 
     * Dodaje nowy film do bazy danych
   * POST /{id} 
-    * Parametry: [{'title?': string, 'path?': string, 'tags?': array, 'short_desc?': string, 'full_desc?': string}] 
+    * Parametry: [{'title?': string, 'path?': string, 'short_desc?': string, 'full_desc?': string}] 
     * Aktualizuje dane filmu o danym id
   * DELETE /{id} 
     * Usuwa z bazy danych film o danym id

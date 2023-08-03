@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VideoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,9 +21,25 @@ use App\Http\Controllers\UserController;
 // });
 
 Route::controller(UserController::class)->prefix('users')->group(function() {
-    Route::get('/{id?}', 'showById');
+    Route::get('/', 'showAll');
+    Route::get('/{id}', 'showById');
     Route::get('/nameHas/{key}', 'showByTitle');
     Route::put('/', 'add');
     Route::post('/{id}', 'update');
     Route::delete('/{id}', 'delete');
+
+    Route::fallback(function () {return response('Endpoint not found', 404);});
+});
+
+Route::controller(VideoController::class)->prefix('videos')->group(function() {
+    Route::get('/', 'showAll');
+    Route::get('/{id}', 'showById');
+    Route::get('/titleHas/{key}', 'showByTitle');
+    Route::get('/tag/{tagId}', 'showByTag');
+    Route::get('/titleHas/{key}/tag/{tagId}', 'showByTitleAndTag');
+    Route::put('/', 'add');
+    Route::post('/{id}', 'update');
+    Route::delete('/{id}', 'delete');
+
+    Route::fallback(function () {return response('Endpoint not found', 404);});
 });
