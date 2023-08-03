@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideoController;
+use App\Http\Controllers\FavouriteVideoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,17 @@ Route::controller(UserController::class)->prefix('users')->group(function() {
     Route::get('/nameHas/{key}', 'showByTitle');
     Route::put('/', 'add');
     Route::post('/{id}', 'update');
+    Route::delete('/{id}', 'delete');
+
+    Route::fallback(function () {return response('Endpoint not found', 404);});
+});
+
+Route::controller(FavouriteVideoController::class)->prefix('videos/favourites')->group(function() {
+    Route::get('/', 'showAll');
+    Route::get('/{id}', 'showById');
+    Route::get('/user/{id}', 'showByUser');
+    Route::get('/video/{id}', 'showByVideo');
+    Route::put('/', 'add');
     Route::delete('/{id}', 'delete');
 
     Route::fallback(function () {return response('Endpoint not found', 404);});

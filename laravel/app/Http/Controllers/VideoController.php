@@ -70,22 +70,22 @@ class VideoController extends Controller {
   }
 
   public function add(Request $request) {
-      try {
-          if (!$request->has(['title', 'path'])) {
-            return response('Bad request', 400);
-          }
-
-          $video = new Video;
-          $video->title = $request->title;
-          $video->path = $request->path;
-          $video->short_desc = $request->short_desc ?? '';
-          $video->full_desc = $request->full_desc ?? '';
-          $video->save();
-
-          return response('Video added', 201);
-      } catch (Exception $e) {
-          return response('Bad request', 400);
+    try {
+      if (!$request->has(['title', 'path'])) {
+        return response('Bad request', 400);
       }
+
+      $video = new Video;
+      $video->title = $request->title;
+      $video->path = $request->path;
+      $video->short_desc = $request->short_desc ?? '';
+      $video->full_desc = $request->full_desc ?? '';
+      $video->save();
+
+      return response('Video added', 201);
+    } catch (Exception $e) {
+      return response('Bad request', 400);
+    }
   }
 
   public function update(Request $request, mixed $id) {
@@ -109,13 +109,13 @@ class VideoController extends Controller {
   }
 
   public function delete(mixed $id) {
-      try {
-          $video = Video::findOrFail($id);
-          $video->delete();
+    try {
+      $video = Video::findOrFail($id);
+      $video->delete();
 
-          return response('Video deleted', 200);
-      } catch (ModelNotFoundException $e) {
-          return response('Invalid video id', 404);
-      }
+      return response('Video deleted', 200);
+    } catch (ModelNotFoundException $e) {
+      return response('Invalid video id', 404);
+    }
   }
 }
