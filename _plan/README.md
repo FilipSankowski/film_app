@@ -143,7 +143,7 @@ Strona internetowa udostępniajaca materiały do nauki z różnych dziedzin i za
   * GET /{id} 
     * Zwraca dane użytkownika o danym id
   * GET /nameHas/{key}
-    * Zwraca dane użytkownika którego nazwa zawiera klucz
+    * Zwraca dane użytkowników którego nazwa zawiera klucz
   * PUT / 
     * Parametry: [{'name': string, 'password': string}] 
     * Dodaje nowego użytkownika do bazy danych
