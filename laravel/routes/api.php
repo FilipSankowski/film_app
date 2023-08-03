@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\FavouriteVideoController;
 use App\Http\Controllers\WatchLaterController;
+use App\Http\Controllers\TagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,6 +65,20 @@ Route::controller(VideoController::class)->prefix('videos')->group(function() {
     Route::put('/', 'add');
     Route::post('/{id}', 'update');
     Route::delete('/{id}', 'delete');
+
+    Route::fallback(function () {return response('Endpoint not found', 404);});
+});
+
+Route::controller(TagController::class)->prefix('tags')->group(function() {
+    Route::get('/', 'showAll');
+    Route::get('/{id}', 'showById');
+    Route::put('/', 'add');
+    Route::post('/{id}', 'update');
+    Route::delete('/{id}', 'delete');
+    Route::get('/video/{id}', 'showByVideo');
+    Route::put('/video/{id_video}/tag/{id_tag}', 'addTagToVideo');
+    Route::delete('/video/{id}', 'deleteAllTagsFromVideo');
+    Route::delete('/video/{id_video}/tag/{id_tag}', 'deleteTagFromVideo');
 
     Route::fallback(function () {return response('Endpoint not found', 404);});
 });

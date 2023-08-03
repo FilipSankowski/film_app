@@ -230,7 +230,7 @@ Strona internetowa udostępniajaca materiały do nauki z różnych dziedzin i za
     * Zwraca dane o wszystkich komentarzach użytkownika o danym id
   * GET /video/{id} 
     * Zwraca dane o wszystkich komentarzach do filmu o danym id
-  * GET /video/{videoId}/user/{userId}
+  * GET /video/{id_video}/user/{id_user}
     * Zwraca dane o wszystkich komentarzach danego użytkownika do danego filmu
   * GET /clear/{id}
     * Zmienia treść komentarza o danym id na "Komentarz usunięty przez administrację"
