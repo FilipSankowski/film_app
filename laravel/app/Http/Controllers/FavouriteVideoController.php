@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Video;
 use App\Models\User;
 use App\Models\FavouriteVideo;
+use App\Http\Requests\FavouriteVideo\AddFavouriteVideoRequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class FavouriteVideoController extends Controller {
@@ -42,17 +43,15 @@ class FavouriteVideoController extends Controller {
     }
   }
 
-  public function add(Request $request) {
+  public function add(AddFavouriteVideoRequest $request) {
     try {
-      if (!$request->filled(['id_user', 'id_video'])) {
-        return response('Bad request', 400);
-      }
-      User::findOrFail($request->id_user);
-      Video::findOrFail($request->id_video);
+      $data = $request->validated();
+      User::findOrFail($data['id_user']);
+      Video::findOrFail($data['id_video']);
 
       $video = new FavouriteVideo;
-      $video->id_user = $request->id_user;
-      $video->id_video = $request->id_video;
+      $video->id_user = $data['id_user'];
+      $video->id_video = $data['id_video'];
       $video->save();
 
       return response('Video added to favourite videos', 201);
