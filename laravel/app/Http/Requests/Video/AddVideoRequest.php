@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\User;
+namespace App\Http\Requests\Video;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\ValidationException;
 
-class UpdateUserRequest extends FormRequest
+class AddVideoRequest extends FormRequest
 {
   protected $stopOnFirstFailure = true;
   /**
@@ -24,23 +24,12 @@ class UpdateUserRequest extends FormRequest
    */
   public function rules(): array
   {
-    $passwordRegex = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/";
     return [
-      'name' => ['unique:App\Models\User', 'max:20', 'required_without_all:password'],
-      'password' => ['required_without_all:name', "regex:$passwordRegex"]
+      'title' => ['required', 'string', 'max:70'],
+      'path' => ['required', 'string'],
+      'short_desc' => ['nullable', 'string', 'max:50'],
+      'full_desc' => ['nullable', 'string', 'max:1000']
     ];
-  }
-
-  /**
-   * Get the error messages for the defined validation rules.
-   *
-   * @return array<string, string>
-   */
-  public function messages(): array
-  {
-      return [
-          'password.regex' => 'Password must be at least 8 characters long, contain at least 1 lowercase letter, 1 uppercase letter, 1 digit and 1 special character'
-      ];
   }
 
   protected function failedValidation(Validator $validator)

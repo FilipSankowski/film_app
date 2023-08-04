@@ -4,19 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Video;
+use App\Http\Requests\Video\AddVideoRequest;
+use App\Http\Requests\Video\UpdateVideoRequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class VideoController extends Controller {
-  // check if $array only contains keys specified in $validKeys
-  private function arrayContainsOnly(array $array, array $validKeys) {
-    foreach (array_keys($array) as $key) {
-        if (!in_array($key, $validKeys)) {
-            return false;
-        }
-    }
-    return true;
-  }
-
   public function showAll() {
     try {
       return response(Video::all(), 200);
@@ -69,17 +61,15 @@ class VideoController extends Controller {
     }
   }
 
-  public function add(Request $request) {
+  public function add(AddVideoRequest $request) {
     try {
-      if (!$request->filled(['title', 'path'])) {
-        return response('Bad request', 400);
-      }
+      $data = $request->validated();
 
       $video = new Video;
-      $video->title = $request->title;
-      $video->path = $request->path;
-      $video->short_desc = $request->short_desc ?? '';
-      $video->full_desc = $request->full_desc ?? '';
+      $video->title = $data['title'];
+      $video->path = $data['path'];
+      $video->short_desc = $data['short_desc'] ?? '';
+      $video->full_desc = $data['full_desc'] ?? '';
       $video->save();
 
       return response('Video added', 201);
@@ -88,24 +78,22 @@ class VideoController extends Controller {
     }
   }
 
-  public function update(Request $request, mixed $id) {
-      $validKeys = ['title', 'path', 'short_desc', 'full_desc'];
-      try {
-          $video = Video::findOrFail($id);
-          if (!$request->anyFilled($validKeys) || !$this->arrayContainsOnly($request->all(), $validKeys)) {
-              return response('Bad request', 400);
-          }
-          foreach(array_keys($request->all()) as $key) {
-              $video->$key = $request->$key;
-          }
-          $video->save();
+  public function update(UpdateVideoRequest $request, mixed $id) {
+    try {
+      $data = $request->validated();
+      $video = Video::findOrFail($id);
 
-          return response('Video updated', 200);
-      } catch (ModelNotFoundException $e) {
-          return response('Invalid video id', 404);
-      } catch (Exception $e) {
-          return response('Bad request', 400);
+      foreach(array_keys($data) as $key) {
+        $video->$key = $data[$key];
       }
+      $video->save();
+
+      return response('Video updated', 200);
+    } catch (ModelNotFoundException $e) {
+      return response('Invalid video id', 404);
+    } catch (Exception $e) {
+      return response('Bad request', 400);
+    }
   }
 
   public function delete(mixed $id) {
