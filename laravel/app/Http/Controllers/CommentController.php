@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Video;
 use App\Models\User;
 use App\Models\Comment;
+use App\Http\Requests\Comment\AddCommentRequest;
+use App\Http\Requests\Comment\UpdateCommentRequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CommentController extends Controller {
@@ -79,19 +81,17 @@ class CommentController extends Controller {
     }
   }
 
-  public function add(Request $request) {
+  public function add(AddCommentRequest $request) {
     try {
-      if (!$request->filled(['id_user', 'id_video', 'text'])) {
-        return response('Bad request', 400);
-      }
-      User::findOrFail($request->id_user);
-      Video::findOrFail($request->id_video);
+      $data = $request->validated();
+      User::findOrFail($data['id_user']);
+      Video::findOrFail($data['id_video']);
 
       $comment = new Comment;
-      $comment->id_user = $request->id_user;
-      $comment->id_video = $request->id_video;
-      $comment->text = $request->text;
-      $comment->id_parent = $request->id_parent;
+      $comment->id_user = $data['id_user'];
+      $comment->id_video = $data['id_video'];
+      $comment->text = $data['text'];
+      $comment->id_parent = $data['id_parent'] ?? null;
       $comment->save();
 
       return response('Comment added', 201);
@@ -102,13 +102,12 @@ class CommentController extends Controller {
     }
   }
 
-  public function update(Request $request, mixed $id) {
+  public function update(UpdateCommentRequest $request, mixed $id) {
     try {
       $comment = Comment::findOrFail($id);
-      if (!$request->filled(['text'])) {
-        return response('Bad request', 400);
-      }
-      $comment->text = $request->text;
+      $data = $request->validated();
+
+      $comment->text = $data['text'];
       $comment->save();
 
       return response('Comment updated', 200);
