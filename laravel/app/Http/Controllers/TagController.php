@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Tag;
 use App\Models\FilmTag;
 use App\Models\Video;
+use App\Http\Requests\Tag\AddTagRequest;
+use App\Http\Requests\Tag\UpdateTagRequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class TagController extends Controller {
@@ -26,14 +28,12 @@ class TagController extends Controller {
     return response($video, 200);
   }
 
-  public function add(Request $request) {
+  public function add(AddTagRequest $request) {
     try {
-      if (!$request->filled(['name'])) {
-        return response('Bad request', 400);
-      }
+      $data = $request->validated();
 
       $tag = new Tag;
-      $tag->name = $request->name;
+      $tag->name = $data['name'];
       $tag->save();
 
       return response('Tag added', 201);
@@ -42,20 +42,19 @@ class TagController extends Controller {
     }
   }
 
-  public function update(Request $request, mixed $id) {
+  public function update(UpdateTagRequest $request, mixed $id) {
     try {
-        $tag = Tag::findOrFail($id);
-        if (!$request->filled(['name'])) {
-            return response('Bad request', 400);
-        }
-        $tag->name = $request->name;
-        $tag->save();
+      $tag = Tag::findOrFail($id);
+      $data = $request->validated();
 
-        return response('Tag updated', 200);
+      $tag->name = $data['name'];
+      $tag->save();
+
+      return response('Tag updated', 200);
     } catch (ModelNotFoundException $e) {
-        return response('Invalid tag id', 404);
+      return response('Invalid tag id', 404);
     } catch (Exception $e) {
-        return response('Bad request', 400);
+      return response('Bad request', 400);
     }
 }
   
