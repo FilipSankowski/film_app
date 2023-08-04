@@ -3,21 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\User\AddUserRequest;
+use App\Http\Requests\User\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UserController extends Controller
 {
-    // check if $array only contains keys specified in $validKeys
-    private function arrayContainsOnly(array $array, array $validKeys) {
-        foreach (array_keys($array) as $key) {
-            if (!in_array($key, $validKeys)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     public function showAll() {
         try {
             return response(User::all(), 200);
@@ -43,14 +35,13 @@ class UserController extends Controller
         }
     }
 
-    public function add(Request $request) {
+    public function add(AddUserRequest $request) {
         try {
-            if (!$request->filled(['name', 'password'])) {
-                return response('Bad request', 400);
-            }
+            $data = $request->validated();
+
             $user = new User;
-            $user->name = $request->name;
-            $user->password = $request->password;
+            $user->name = $data['name'];
+            $user->password = $data['password'];
             $user->save();
 
             return response('User added', 201);
@@ -59,15 +50,12 @@ class UserController extends Controller
         }
     }
 
-    public function update(Request $request, mixed $id) {
-        $validKeys = ['name', 'password'];
+    public function update(UpdateUserRequest $request, mixed $id) {
         try {
             $user = User::findOrFail($id);
-            if (!$request->anyFilled($validKeys) || !$this->arrayContainsOnly($request->all(), $validKeys)) {
-                return response('Bad request', 400);
-            }
-            foreach(array_keys($request->all()) as $key) {
-                $user->$key = $request->$key;
+            $data = $request->validated();
+            foreach(array_keys($data) as $key) {
+                $user->$key = $data[$key];
             }
             $user->save();
 
