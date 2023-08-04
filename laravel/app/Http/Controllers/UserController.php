@@ -45,7 +45,7 @@ class UserController extends Controller
 
     public function add(Request $request) {
         try {
-            if (!$request->has(['name', 'password'])) {
+            if (!$request->filled(['name', 'password'])) {
                 return response('Bad request', 400);
             }
             $user = new User;
@@ -63,7 +63,7 @@ class UserController extends Controller
         $validKeys = ['name', 'password'];
         try {
             $user = User::findOrFail($id);
-            if (!$request->hasAny($validKeys) || !$this->arrayContainsOnly($request->all(), $validKeys)) {
+            if (!$request->anyFilled($validKeys) || !$this->arrayContainsOnly($request->all(), $validKeys)) {
                 return response('Bad request', 400);
             }
             foreach(array_keys($request->all()) as $key) {

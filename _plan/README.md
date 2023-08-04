@@ -126,7 +126,6 @@ Strona internetowa udostępniajaca materiały do nauki z różnych dziedzin i za
   * Dodawać nowy komentarz
   * Dodawać komentarz w odpowiedzi do innego komentarza
   * Edytować istniejący komentarz
-  * Usunąć istniejący komentarz
 * Założenia:
   * Sekcja komentarzy znajduje się pod opisem filmu
   * Komentarz ma maksymalną długość 250 znaków
@@ -226,6 +225,10 @@ Strona internetowa udostępniajaca materiały do nauki z różnych dziedzin i za
     * Usuwa tag o danym id z filmu o danym id
 ---
 * /api/comments
+  * GET / 
+    * Zwraca dane o wszystkich komentarzach
+  * GET /{id}
+    * Zwraca dane o komentarzu o danym id
   * GET /user/{id} 
     * Zwraca dane o wszystkich komentarzach użytkownika o danym id
   * GET /video/{id} 
@@ -234,7 +237,14 @@ Strona internetowa udostępniajaca materiały do nauki z różnych dziedzin i za
     * Zwraca dane o wszystkich komentarzach danego użytkownika do danego filmu
   * GET /clear/{id}
     * Zmienia treść komentarza o danym id na "Komentarz usunięty przez administrację"
-<br><br>
+  * PUT / 
+    * Parametry: [{'id_parent?': int, 'id_user': int, 'id_video': int, 'text': string}]
+    * Dodaje nowy komentarz do bazy danych
+  * POST /{id} 
+    * Parametry: [{'text': string}]
+    * Aktualizuje text komentarza o danym id
+  * DELETE /{id} 
+    * Usuwa komentarz z bazy danych
 ---
 <!-- 
 ## Release templete - 

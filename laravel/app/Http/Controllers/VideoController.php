@@ -71,7 +71,7 @@ class VideoController extends Controller {
 
   public function add(Request $request) {
     try {
-      if (!$request->has(['title', 'path'])) {
+      if (!$request->filled(['title', 'path'])) {
         return response('Bad request', 400);
       }
 
@@ -92,7 +92,7 @@ class VideoController extends Controller {
       $validKeys = ['title', 'path', 'short_desc', 'full_desc'];
       try {
           $video = Video::findOrFail($id);
-          if (!$request->hasAny($validKeys) || !$this->arrayContainsOnly($request->all(), $validKeys)) {
+          if (!$request->anyFilled($validKeys) || !$this->arrayContainsOnly($request->all(), $validKeys)) {
               return response('Bad request', 400);
           }
           foreach(array_keys($request->all()) as $key) {

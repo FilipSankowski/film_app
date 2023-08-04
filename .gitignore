@@ -1,5 +1,3 @@
-_plan/database_creation_commands
-
 laravel/.phpunit.cache
 laravel/node_modules
 laravel/public/build

@@ -28,7 +28,7 @@ class TagController extends Controller {
 
   public function add(Request $request) {
     try {
-      if (!$request->has(['name'])) {
+      if (!$request->filled(['name'])) {
         return response('Bad request', 400);
       }
 
@@ -45,7 +45,7 @@ class TagController extends Controller {
   public function update(Request $request, mixed $id) {
     try {
         $tag = Tag::findOrFail($id);
-        if (!$request->has(['name'])) {
+        if (!$request->filled(['name'])) {
             return response('Bad request', 400);
         }
         $tag->name = $request->name;

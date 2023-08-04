@@ -44,7 +44,7 @@ class WatchLaterController extends Controller {
 
   public function add(Request $request) {
     try {
-      if (!$request->has(['id_user', 'id_video'])) {
+      if (!$request->filled(['id_user', 'id_video'])) {
         return response('Bad request', 400);
       }
       User::findOrFail($request->id_user);
