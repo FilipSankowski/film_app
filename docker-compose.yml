@@ -1,12 +1,14 @@
 version: '3'
 services:
-    laravel.test:
+    laravel:
         build:
-            context: ./vendor/laravel/sail/runtimes/8.2
+            context: ./laravel/vendor/laravel/sail/runtimes/8.2
             dockerfile: Dockerfile
             args:
                 WWWGROUP: '${WWWGROUP}'
         image: sail-8.2/app
+        env_file:
+            - .env
         extra_hosts:
             - 'host.docker.internal:host-gateway'
         ports:
@@ -17,9 +19,9 @@ services:
             LARAVEL_SAIL: 1
             XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
             XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
-            IGNITION_LOCAL_SITES_PATH: '${PWD}'
+            IGNITION_LOCAL_SITES_PATH: '.'
         volumes:
-            - '.:/var/www/html'
+            - './laravel:/var/www/html'
         networks:
             - sail
         depends_on:
@@ -28,6 +30,7 @@ services:
             - meilisearch
             - mailpit
             - selenium
+            - next
     postgres:
         image: 'postgres:latest'
         ports:
@@ -38,7 +41,7 @@ services:
             POSTGRES_DB: '${DB_DATABASE}'
         volumes:
             - 'sail-postgres:/var/lib/postgresql/data'
-            - './vendor/laravel/sail/database/pgsql/create-testing-database.sh:/docker-entrypoint-initdb.d/10-create-testing-database.sh'
+            - './laravel/vendor/laravel/sail/database/pgsql/create-testing-database.sh:/docker-entrypoint-initdb.d/10-create-testing-database.sh'
         networks:
             - sail
         healthcheck:
@@ -47,6 +50,19 @@ services:
                 - pg_isready
             retries: 3
             timeout: 5s
+    next:
+        image: 'node:latest'
+        env_file:
+            - .env
+        ports:
+            - '${FORWARD_NEXT_PORT:-3000}:3000'
+        working_dir: '/usr/src/app'
+        volumes:
+            - ./nextjs:/usr/src/app
+            - sail-next:/usr/src/app/node_modules
+        networks:
+            - sail
+        command: 'bash -c "npm i && npm run dev"'
     redis:
         image: 'redis:alpine'
         ports:
@@ -103,4 +119,6 @@ volumes:
     sail-redis:
         driver: local
     sail-meilisearch:
+        driver: local
+    sail-next:
         driver: local

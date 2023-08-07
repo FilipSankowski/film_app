@@ -21,3 +21,5 @@ laravel/.vscode
 nextjs/node_modules/
 nextjs/.env
 nextjs/.next/
+
+.env
