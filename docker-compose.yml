@@ -7,8 +7,6 @@ services:
             args:
                 WWWGROUP: '${WWWGROUP}'
         image: sail-8.2/app
-        env_file:
-            - .env
         extra_hosts:
             - 'host.docker.internal:host-gateway'
         ports:
@@ -52,8 +50,6 @@ services:
             timeout: 5s
     next:
         image: 'node:latest'
-        env_file:
-            - .env
         ports:
             - '${FORWARD_NEXT_PORT:-3000}:3000'
         working_dir: '/usr/src/app'
