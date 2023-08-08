@@ -17,18 +17,6 @@ $app = new Illuminate\Foundation\Application(
 
 /*
 |--------------------------------------------------------------------------
-| Link external environment file
-|--------------------------------------------------------------------------
-|
-| This will load the .env file from the directory 2 levels above this
-| file's directory
-|
-*/
-
-$app->useEnvironmentPath(dirname(__DIR__, 2));
-
-/*
-|--------------------------------------------------------------------------
 | Bind Important Interfaces
 |--------------------------------------------------------------------------
 |
