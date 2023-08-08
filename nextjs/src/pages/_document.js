@@ -24,4 +24,15 @@ class MyDocument extends Document {
     }
 }
 
+if (process.env.NEXT_HANDLE_SHUTDOWN_MANUALLY) {
+    process.on('SIGTERM', () => {
+      console.log('Received SIGTERM: ', 'cleaning up');
+      process.exit(0);
+    });
+    process.on('SIGINT', () => {
+      console.log('Received SIGINT: ', 'cleaning up');
+      process.exit(0);
+    });
+}
+
 export default MyDocument
