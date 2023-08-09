@@ -1,19 +1,22 @@
+import Footer from './_components/Footer'
+import RootNavBar from './_components/RootNavBar'
+import './globals.css'
+
 export default function RootLayout({children}) {
   return (
     <html>
-      <head>
-
-      </head>
       <body>
-        <div>
+        <div className='grid grid-cols-1 grid-flow-row gap-0'>
           <div>
-            {/* Navbar */}
+            <RootNavBar />
           </div>
           
-          {children}
+          <div>
+            {children}
+          </div>
 
           <div>
-            {/* Footer */}
+            <Footer>footer</Footer>
           </div>
         </div>
       </body>
