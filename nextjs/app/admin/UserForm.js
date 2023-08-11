@@ -3,7 +3,7 @@ import Input from "@/_components/Input";
 import Label from "@/_components/Label";
 import Select from "@/_components/Select";
 import SelectOptions from "@/_components/SelectOptions";
-import { useRequest } from "@/_hooks/request";
+import useRequest from "@/_hooks/request";
 import axios from "@/_lib/axios";
 import { useEffect, useState } from "react"
 
@@ -26,7 +26,6 @@ export default function UserForm() {
       method: 'DELETE'
     }
   ]
-  const users = useRequest('GET', '/api/users');
 
   const [action, setAction] = useState(options[0].method);
   const [name, setName] = useState('');
@@ -37,11 +36,11 @@ export default function UserForm() {
     e.preventDefault()
   }
 
+  const {users, error} = useRequest();
   useEffect(() => {
-    axios.get('/api/users')
-      .then(res => res.data)
-      .then(data => console.log(data))
-  }, [])
+    if (error) throw error
+    console.log('Users: ', users)
+  }, [users, error])
 
   return (
     <div className="bg-gray-300">
