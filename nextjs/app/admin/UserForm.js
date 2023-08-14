@@ -36,11 +36,30 @@ export default function UserForm() {
     e.preventDefault()
   }
 
-  const {users, error} = useRequest();
+  // const {users, error} = useRequest('get', 'users');
+  // useEffect(() => {
+  //   if (error) throw error
+  //   console.log('Users: ', users)
+  // }, [users, error])
+
   useEffect(() => {
-    if (error) throw error
-    console.log('Users: ', users)
-  }, [users, error])
+    axios.request({
+      method: 'GET',
+      url: '/users',
+    })
+      .then(res => console.log('Axios res data: ', res.data))
+      .catch(error => console.warn('Axios error: ', error))
+
+    // fetch('http://localhost:8000/api/users', {
+    //   method: 'GET',
+    //   creditentials: 'include',
+    //   headers: {
+    //     'Content-Type': 'application/x-www-form-urlencoded'
+    //   }
+    // })
+    //   .then(res => console.log('Fetch res data: ', res.json()))
+    //   .catch(error => console.warn('Fetch error: ', error))
+  }, [])
 
   return (
     <div className="bg-gray-300">

@@ -24,6 +24,15 @@ use App\Http\Controllers\CommentController;
 //     return $request->user();
 // });
 
+// Route::options('{any}', function() {
+//     return response('option route reached', 290)
+//         ->withHeaders([
+//             'Access-Control-Allow-Origin' => '*',
+//             'Access-Control-Allow-Methods' => '*',
+//             'Access-Control-Allow-Headers' => '*',
+//         ]);
+// });
+
 Route::controller(UserController::class)->prefix('users')->group(function() {
     Route::get('/', 'showAll');
     Route::get('/{id}', 'showById');
@@ -96,4 +105,4 @@ Route::controller(CommentController::class)->prefix('comments')->group(function(
     Route::delete('/{id}', 'delete');
 
     Route::fallback(function () {return response('Endpoint not found', 404);});
-});
+});  
