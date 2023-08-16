@@ -1,3 +1,5 @@
+'use client'
+
 import FormCard from "@/_components/FormCard";
 import Input from "@/_components/Input";
 import Label from "@/_components/Label";
@@ -6,12 +8,26 @@ import SelectOptions from "@/_components/SelectOptions";
 import useRequest from "@/_hooks/request";
 import axios from "@/_lib/axios";
 import { useEffect, useState } from "react"
+import useSWR from "swr";
 
 export const metadata = {
   title: 'Admin Panel'
 }
 
-export default function UserForm() {
+// export async function getStaticProps() {
+//   const response = await axios.request({
+//     url: '/users',
+//     method: 'GET',
+//     headers: {
+//       'Content-Type': 'x-www-form-urlencoded',
+//     },
+//   })
+//   const data = data.data;
+  
+//   return {props: {data}}
+// }
+
+export default function UserForm({userData}) {
   const options = [
     {
       label: 'Dodaj',
@@ -36,30 +52,7 @@ export default function UserForm() {
     e.preventDefault()
   }
 
-  // const {users, error} = useRequest('get', 'users');
-  // useEffect(() => {
-  //   if (error) throw error
-  //   console.log('Users: ', users)
-  // }, [users, error])
-
-  useEffect(() => {
-    axios.request({
-      method: 'GET',
-      url: '/users',
-    })
-      .then(res => console.log('Axios res data: ', res.data))
-      .catch(error => console.warn('Axios error: ', error))
-
-    // fetch('http://localhost:8000/api/users', {
-    //   method: 'GET',
-    //   creditentials: 'include',
-    //   headers: {
-    //     'Content-Type': 'application/x-www-form-urlencoded'
-    //   }
-    // })
-    //   .then(res => console.log('Fetch res data: ', res.json()))
-    //   .catch(error => console.warn('Fetch error: ', error))
-  }, [])
+  console.log('Page data: ', userData);
 
   return (
     <div className="bg-gray-300">

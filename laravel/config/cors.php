@@ -15,16 +15,18 @@ return [
     |
     */
 
-    'paths' => ['/api/users'],
+    'paths' => ['/'],
 
-    'allowed_methods' => ['*'],
+    'allowed_methods' => ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'HEAD'],
 
     'allowed_origins' => [env('FRONTEND_URL', 'http://localhost:3000')],
     //'allowed_origins' => ['*'],
 
     'allowed_origins_patterns' => [],
 
-    'allowed_headers' => ['*'],
+    'allowed_headers' => [
+        'Content-Type'
+    ],
 
     'exposed_headers' => [],
 

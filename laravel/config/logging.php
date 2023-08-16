@@ -128,4 +128,16 @@ return [
         ],
     ],
 
+    /* 
+    |--------------------------------------------------------------------------
+    | Log API Actions
+    |--------------------------------------------------------------------------
+    |
+    | This options controls whether requests and responses should be registered
+    | in laravel.log file with info tag
+    |
+    */
+
+    'log_requests' => env('LOG_REQUESTS', 'false'),
+    'log_responses' => env('LOG_RESPONSES', 'false'),
 ];
