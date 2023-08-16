@@ -18,7 +18,7 @@ class LogResponse
     {
         $response = $next($request);
         if (config('logging.log_responses', 'false')) {
-            Log::debug("Response sent:\n$response\n");
+            Log::info("Response sent:\n$response\n");
         }
 
         return $response;

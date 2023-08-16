@@ -5,29 +5,13 @@ import Input from "@/_components/Input";
 import Label from "@/_components/Label";
 import Select from "@/_components/Select";
 import SelectOptions from "@/_components/SelectOptions";
-import useRequest from "@/_hooks/request";
-import axios from "@/_lib/axios";
-import { useEffect, useState } from "react"
-import useSWR from "swr";
+import { useState } from "react"
 
 export const metadata = {
   title: 'Admin Panel'
 }
 
-// export async function getStaticProps() {
-//   const response = await axios.request({
-//     url: '/users',
-//     method: 'GET',
-//     headers: {
-//       'Content-Type': 'x-www-form-urlencoded',
-//     },
-//   })
-//   const data = data.data;
-  
-//   return {props: {data}}
-// }
-
-export default function UserForm({userData}) {
+export default function UserForm({userData: {data, error}}) {
   const options = [
     {
       label: 'Dodaj',
@@ -51,8 +35,6 @@ export default function UserForm({userData}) {
   const submit = (e) => {
     e.preventDefault()
   }
-
-  console.log('Page data: ', userData);
 
   return (
     <div className="bg-gray-300">
