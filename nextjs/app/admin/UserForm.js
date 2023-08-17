@@ -6,7 +6,8 @@ import Input from "@/_components/Input";
 import Label from "@/_components/Label";
 import Select from "@/_components/Select";
 import SelectOptions from "@/_components/SelectOptions";
-import { useState } from "react"
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 export default function UserForm({userData: {data, error}}) {
   if (error) throw error
@@ -38,6 +39,9 @@ export default function UserForm({userData: {data, error}}) {
     switch (action) {
       case 'PUT': {
         console.log('Name: ', name, '; Password: ', password);
+        toast.info('test', {
+          position: toast.POSITION.BOTTOM_RIGHT,
+        })
         break;
       }
       case 'POST': {
@@ -114,8 +118,10 @@ export default function UserForm({userData: {data, error}}) {
               type="text"
               value={name}
               className="block mt-1 mb-4 w-full"
-              onChange={(event) => {setName(event.target.value)}}
-              required
+              onChange={(event) => {setName(event.target.value); event.target.setCustomValidity('')}}
+              // change the not valid message to signal only one of the fields is required
+              onInvalid={(event) => {event.target.setCustomValidity('One of the fields must be filled')}}
+              required={password.trim() === ''}
             />
         
             <Label htmlFor={'password'}>Nowe hasło</Label>
@@ -125,7 +131,7 @@ export default function UserForm({userData: {data, error}}) {
               value={password}
               className="block mt-1 mb-4 w-full"
               onChange={(event) => {setPassword(event.target.value)}}
-              required
+              required={name.trim() === ''}
             />
             </div>
 

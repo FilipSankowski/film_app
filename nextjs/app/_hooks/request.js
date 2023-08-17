@@ -1,8 +1,7 @@
 import axios from "@/_lib/axios";
 
 export default async function useRequest(method, url, ...props) {
-  let data = []
-  let error = ''
+  let result = {}
 
   try {
     const res = await axios.request({
@@ -10,10 +9,10 @@ export default async function useRequest(method, url, ...props) {
       url: url,
       ...props,
     })
-    data = res.data
+    result = {data: res.data, status: res.status}
   } catch (err) {
-    error = err
+    result = {...result, error: err}
   }
 
-  return {data, error}
+  return result
 }
