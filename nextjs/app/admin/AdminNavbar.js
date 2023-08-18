@@ -8,16 +8,16 @@ export default function AdminNavbar({className = '', ...props}) {
     {...props}
     >
       <Dropdown header={'Wyświetl dane'}>
-        <DropdownLink href={'#'}>Użytkownicy</DropdownLink>
-        <DropdownLink href={'#'}>Wideo</DropdownLink>
-        <DropdownLink href={'#'}>Tagi</DropdownLink>
-        <DropdownLink href={'#'}>Komentarze</DropdownLink>
+        <DropdownLink href={'/admin/users'}>Użytkownicy</DropdownLink>
+        <DropdownLink href={'/admin/videos'}>Wideo</DropdownLink>
+        <DropdownLink href={'/admin/tags'}>Tagi</DropdownLink>
+        <DropdownLink href={'/admin/comments'}>Komentarze</DropdownLink>
       </Dropdown>
       <Dropdown header={'Modyfikuj dane'}>
-        <DropdownLink href={'#'}>Użytkownicy</DropdownLink>
-        <DropdownLink href={'#'}>Wideo</DropdownLink>
-        <DropdownLink href={'#'}>Tagi</DropdownLink>
-        <DropdownLink href={'#'}>Komentarze</DropdownLink>
+        <DropdownLink href={'/admin/users/form'}>Użytkownicy</DropdownLink>
+        <DropdownLink href={'/admin/videos/form'}>Wideo</DropdownLink>
+        <DropdownLink href={'/admin/tags/form'}>Tagi</DropdownLink>
+        <DropdownLink href={'/admin/comments/form'}>Komentarze</DropdownLink>
       </Dropdown>
     </div>
   )
