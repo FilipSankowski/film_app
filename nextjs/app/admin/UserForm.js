@@ -9,7 +9,7 @@ import SelectOptions from "@/_components/SelectOptions";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
-export default function UserForm({userData: {data, error}}) {
+export default function UserForm({users: {data, error}}) {
   if (error) throw error
 
   const actionOptions = [

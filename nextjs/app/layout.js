@@ -1,6 +1,6 @@
 import ToastProvider from './ToastProvider'
 import Footer from './_components/Footer'
-import RootNavBar from './_components/RootNavBar'
+import RootNavBar from './RootNavBar'
 import './globals.css'
 
 export default function RootLayout({children}) {
@@ -18,7 +18,7 @@ export default function RootLayout({children}) {
             </div>
 
             <div>
-              <Footer>footer</Footer>
+              <Footer />
             </div>
           </div>
         </ToastProvider>

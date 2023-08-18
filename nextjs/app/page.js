@@ -4,7 +4,7 @@ export const metadata = {
 
 export default function Home() {
   return (
-    <div className="bg-purple-100">
+    <div className="bg-grey-300">
       Home Page
     </div>
   )

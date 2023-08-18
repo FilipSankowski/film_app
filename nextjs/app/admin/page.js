@@ -6,8 +6,10 @@ export const metadata = {
 }
 
 export default async function Admin() {
-  const userData = await useRequest('GET', '/users')
+  const users = await useRequest('GET', '/users')
   return (
-    <UserForm userData={userData} />
+    <div>
+      <UserForm users={users} />
+    </div>
   )
 }

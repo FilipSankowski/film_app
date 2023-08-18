@@ -1,10 +1,13 @@
-export default function Footer({children, className, ...props}) {
+export default function Footer({className, ...props}) {
   return (
     <div 
-    className={`${className} bg-teal-700`} 
+    className={`${className} bg-indigo-600 text-white p-4`} 
     {...props}
     >
-      {children}
+      <p>
+        Autor Strony: <br />
+        Filip Sankowski
+      </p>
     </div>
   )
 }

@@ -1,18 +1,18 @@
-import NavLink from "./NavLink";
+import NavLink from "./_components/NavLink";
 
 export default function RootNavBar({className, ...props}) {
   return (
     <div 
-    className={`${className} flex flex-row gap-0 bg-teal-500`} 
+    className={`${className} flex flex-row gap-0 bg-indigo-600`} 
     {...props}
     >
       <div>
-        <NavLink active={true} href={'/'}>
+        <NavLink href={'/'}>
           Home
         </NavLink>
       </div>
       <div>
-        <NavLink active={true} href={'/admin'}>
+        <NavLink href={'/admin'}>
           Admin Panel
         </NavLink>
       </div>
